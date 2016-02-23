@@ -49,9 +49,8 @@ public class fragment_vigenere extends Fragment {
 
     private void Vigenere(){
         try {
-            cipher.setKey(mKey.getEditText().getText().toString());
-            cipher.setText(mMessage.getEditText().getText().toString());
-            result.setText(cipher.Vigenere());
+            cipher.VigenereC(mMessage.getEditText().getText().toString(),mKey.getEditText().getText().toString());
+            result.setText(cipher.Result);
         }
         catch (Exception e){
             result.setText(e.getMessage());
