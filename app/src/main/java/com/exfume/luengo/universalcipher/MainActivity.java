@@ -2,9 +2,12 @@ package com.exfume.luengo.universalcipher;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +23,9 @@ import com.exfume.luengo.universalcipher.fragments.fragment_vigenere;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
+    private TabLayout tabLayout;
+    private ViewPager mViewPager;
+    private PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +33,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setToolbar();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.main_pager);
+        mViewPager.setAdapter(mPagerAdapter);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(mViewPager);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
             setDrawer(navigationView);
-            selectItem(navigationView.getMenu().getItem(0));
+            selectItem(navigationView.getMenu().findItem(R.id.Vigenere));
         }
+
     }
 
     private void setToolbar() {
@@ -59,22 +71,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(MenuItem itemDrawer) {
-        Fragment fragment = null;
-        FragmentManager fragmentManager = getSupportFragmentManager();
+
 
         switch (itemDrawer.getItemId()) {
             case R.id.Vigenere:
-                fragment = new fragment_vigenere();
+                mPagerAdapter.addCipher(new fragment_vigenere(),new fragment_vigenere() );
                 break;
         }
-        if (fragment != null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.main_frame , fragment)
-                    .commit();
-        }
-
-        // Setear título actual
         setTitle(itemDrawer.getTitle());
     }
 
@@ -88,5 +91,35 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public class PagerAdapter extends FragmentStatePagerAdapter {
+
+        private Fragment[] mFragmentList;
+
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+            mFragmentList = new Fragment[2];
+        }
+
+        public void addCipher(Fragment Cipher, Fragment Decipher){
+            this.mFragmentList[0] = Cipher;
+            this.mFragmentList[1] = Decipher;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList[position];
+        }
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+          return position == 0 ? "CIPHER" : "DECIPHER";
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    }
 
 }
