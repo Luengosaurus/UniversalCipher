@@ -12,10 +12,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
-import com.exfume.luengo.universalcipher.fragments.fragment_vigenere;
+import com.exfume.luengo.universalcipher.fragments.vigenere_cipher;
+import com.exfume.luengo.universalcipher.fragments.vigenere_decipher;
 
 /**
  * Created by Benjamin on 19/02/2016.
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (itemDrawer.getItemId()) {
             case R.id.Vigenere:
-                mPagerAdapter.addCipher(new fragment_vigenere(),new fragment_vigenere() );
+                mPagerAdapter.addCipher(new vigenere_cipher(),new vigenere_decipher() );
                 break;
         }
         setTitle(itemDrawer.getTitle());

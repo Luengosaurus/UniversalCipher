@@ -9,7 +9,6 @@ public class Cipher {
     public String Result;
 
     public Cipher(){
-
         Result = "";
         this.alphabet = new char[26];
         for (int i = 0; i < alphabet.length; i++) {
