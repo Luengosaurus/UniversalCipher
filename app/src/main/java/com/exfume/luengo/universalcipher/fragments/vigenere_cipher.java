@@ -15,7 +15,7 @@ import com.exfume.luengo.universalcipher.R;
 /**
  * Created by Benjamin on 19/02/2016.
  */
-public class fragment_vigenere extends Fragment {
+public class vigenere_cipher extends Fragment {
 
     private Button mButton;
     private TextInputLayout mMessage;
@@ -23,7 +23,7 @@ public class fragment_vigenere extends Fragment {
     private TextView result;
     private Cipher cipher;
 
-    public fragment_vigenere(){
+    public vigenere_cipher(){
 
     }
 
