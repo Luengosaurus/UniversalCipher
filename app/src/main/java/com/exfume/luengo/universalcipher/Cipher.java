@@ -1,5 +1,7 @@
 package com.exfume.luengo.universalcipher;
 
+import android.text.Editable;
+
 /**
  * Created by Javier on 19/02/2016.
  */
