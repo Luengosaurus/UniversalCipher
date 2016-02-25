@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         }
 
     }
@@ -71,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectItem(MenuItem itemDrawer) {
-
 
         switch (itemDrawer.getItemId()) {
             case R.id.Vigenere:
