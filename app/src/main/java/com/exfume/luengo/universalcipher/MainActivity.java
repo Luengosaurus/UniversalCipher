@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.exfume.luengo.universalcipher.fragments.affine_cipher;
+import com.exfume.luengo.universalcipher.fragments.affine_decipher;
 import com.exfume.luengo.universalcipher.fragments.vigenere_cipher;
 import com.exfume.luengo.universalcipher.fragments.vigenere_decipher;
 
@@ -78,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.Vigenere:
                 mPagerAdapter.addCipher(new vigenere_cipher(),new vigenere_decipher() );
                 break;
+            case R.id.Affine:
+                mPagerAdapter.addCipher(new affine_cipher(), new affine_decipher());
+                break;
+
         }
         mPagerAdapter.notifyDataSetChanged();
         setTitle(itemDrawer.getTitle());
