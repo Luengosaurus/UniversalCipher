@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.exfume.luengo.universalcipher.fragments.vigenere_cipher;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         }
 
     }
@@ -72,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectItem(MenuItem itemDrawer) {
 
-
         switch (itemDrawer.getItemId()) {
             case R.id.Vigenere:
                 mPagerAdapter.addCipher(new vigenere_cipher(),new vigenere_decipher() );
                 break;
         }
+        mPagerAdapter.notifyDataSetChanged();
         setTitle(itemDrawer.getTitle());
     }
 
@@ -93,21 +95,20 @@ public class MainActivity extends AppCompatActivity {
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
 
-        private Fragment[] mFragmentList;
+        private Fragment Cipher;
+        private Fragment Decipher;
 
         public PagerAdapter(FragmentManager fm) {
             super(fm);
-            mFragmentList = new Fragment[2];
         }
-
         public void addCipher(Fragment Cipher, Fragment Decipher){
-            this.mFragmentList[0] = Cipher;
-            this.mFragmentList[1] = Decipher;
+            this.Cipher = Cipher;
+            this.Decipher = Decipher;
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList[position];
+            return position == 0 ? this.Cipher : this.Decipher;
         }
 
 
@@ -119,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return 2;
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
     }
 
