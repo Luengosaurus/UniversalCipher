@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.exfume.luengo.universalcipher.Cipher;
 import com.exfume.luengo.universalcipher.R;
+import com.exfume.luengo.universalcipher.ciphers.Affine;
 
 /**
  * Created by Javier on 25/02/2016.
@@ -21,7 +21,7 @@ public class affine_decipher extends Fragment{
     private TextInputLayout mA;
     private TextInputLayout mB;
     private TextView result;
-    private Cipher cipher;
+    private Affine cipher;
 
     public affine_decipher(){
 
@@ -32,7 +32,6 @@ public class affine_decipher extends Fragment{
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.affine_cipher, container, false);
-        cipher = new Cipher();
         mButton = (Button) view.findViewById(R.id.aSubmit);
         mMessage = (TextInputLayout) view.findViewById(R.id.mMessage);
         mA = (TextInputLayout) view.findViewById(R.id.mA);
@@ -51,11 +50,17 @@ public class affine_decipher extends Fragment{
 
 
     private void Affine(){
-        int a = Integer.parseInt(mA.getEditText().getText().toString());
-        int b = Integer.parseInt(mB.getEditText().getText().toString());
         try{
-            cipher.AffineD(mMessage.getEditText().getText().toString(), a, b);
-            result.setText(cipher.Result);
+            String text = mMessage.getEditText().getText().toString();
+            int a = Integer.parseInt(mA.getEditText().getText().toString());
+            int b = Integer.parseInt(mB.getEditText().getText().toString());
+            if (cipher == null) {
+                cipher = new Affine(text, a, b);
+            }
+            else{
+                cipher.setParams(text,a,b);
+            }
+            result.setText(cipher.Decipher());
         }
         catch (Exception e) {
             result.setText(e.getMessage());

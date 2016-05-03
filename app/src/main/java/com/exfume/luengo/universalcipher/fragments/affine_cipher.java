@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.exfume.luengo.universalcipher.Cipher;
+
 import com.exfume.luengo.universalcipher.R;
+import com.exfume.luengo.universalcipher.ciphers.Affine;
+
 
 
 /**
@@ -24,7 +26,7 @@ public class affine_cipher extends Fragment {
     private TextInputLayout mA;
     private TextInputLayout mB;
     private TextView result;
-    private Cipher cipher;
+    private Affine cipher;
 
     public affine_cipher(){
 
@@ -35,39 +37,40 @@ public class affine_cipher extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.affine_cipher, container, false);
-        try {
-            cipher = new Cipher();
-            mButton = (Button) view.findViewById(R.id.aSubmit);
-            mMessage = (TextInputLayout) view.findViewById(R.id.mMessage);
-            mA = (TextInputLayout) view.findViewById(R.id.mA);
-            mB = (TextInputLayout) view.findViewById(R.id.mB);
-            result = (TextView) view.findViewById(R.id.aResult);
-
-
-            mButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Affine();
-                }
-            });
-        }
-        catch (Exception e){
-            Log.i("ERROR DE HUEVOS", e.getMessage());
-        }
+        mButton = (Button) view.findViewById(R.id.aSubmit);
+        mMessage = (TextInputLayout) view.findViewById(R.id.mMessage);
+        mA = (TextInputLayout) view.findViewById(R.id.mA);
+        mB = (TextInputLayout) view.findViewById(R.id.mB);
+        result = (TextView) view.findViewById(R.id.aResult);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Affine();
+            }
+        });
         return view;
     }
 
 
     private void Affine(){
         try{
+            String text = mMessage.getEditText().getText().toString();
             int a = Integer.parseInt(mA.getEditText().getText().toString());
             int b = Integer.parseInt(mB.getEditText().getText().toString());
-            cipher.AffineC(mMessage.getEditText().getText().toString(),a,b);
-            result.setText(cipher.Result);
+            if (cipher == null) {
+                cipher = new Affine(text, a, b);
+            }
+            else{
+                cipher.setParams(text,a,b);
+            }
+            result.setText(cipher.Cipher());
         }
         catch (Exception e) {
             result.setText(e.getMessage());
+            Log.e("UCipher" , "error",e );
         }
+
+
     }
 
 
