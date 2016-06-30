@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <item
-        android:title="Monoalphabetic">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/Affine"
-                    android:title="Affine" />
-            </group>
-        </menu>
-    </item>
-
-    <item
-        android:title="Polyalphabetic">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/Vigenere"
-                    android:title="Vigenere" />
-            </group>
-        </menu>
-    </item>
-
-
-    <group>
+    <group android:checkableBehavior="single" >
         <item
-            android:id="@+id/nav_bugs"
-            android:icon="@drawable/ic_bug_report_black_24dp"
-            android:title="Bugs" />
+            android:id="@+id/Affine"
+            android:title="Affine" />
+        <item
+            android:id="@+id/Vigenere"
+            android:title="Vigenere" />
 
         <item
-            android:id="@+id/nav_suggestions"
-            android:icon="@drawable/ic_lightbulb_outline_black_24dp"
-            android:title="Suggestions" />
-        <item
-            android:id="@+id/nav_team"
-            android:icon="@drawable/ic_people_black_24dp"
-            android:title="Team" />
+            android:id="@+id/AES"
+            android:title="AES" />
     </group>
+
+    <item
+        android:id="@+id/nav_keys"
+        android:icon="@drawable/ic_vpn_key_black_24dp"
+        android:title="@string/keys" />
+
+    <item
+        android:id="@+id/nav"
+        android:title="Options">
+        <menu>
+            <item
+                android:id="@+id/nav_bugs"
+                android:icon="@drawable/ic_bug_report_black_24dp"
+                android:title="@string/bugs" />
+
+            <item
+                android:id="@+id/nav_ideas"
+                android:icon="@drawable/ic_lightbulb_outline_black_24dp"
+                android:title="@string/ideas" />
+            <item
+                android:id="@+id/nav_team"
+                android:icon="@drawable/ic_people_black_24dp"
+                android:title="@string/team" />
+        </menu>
+    </item>
 
 </menu>

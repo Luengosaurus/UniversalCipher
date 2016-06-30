@@ -17,6 +17,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".KeyManagementActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Base">
+        </activity>
+
+
     </application>
 
 

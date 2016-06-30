@@ -1,4 +1,4 @@
-package com.exfume.luengo.universalcipher.fragments;
+package com.exfume.luengo.universalcipher.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.exfume.luengo.universalcipher.R;
-import com.exfume.luengo.universalcipher.ciphers.Vigenere;
+import com.exfume.luengo.universalcipher.cipher.Vigenere;
 
 /**
  * Created by Benjamin on 19/02/2016.

@@ -1,4 +1,4 @@
-package com.exfume.luengo.universalcipher.ciphers;
+package com.exfume.luengo.universalcipher.cipher;
 
 /**
  * Created by Benjamin on 03/05/2016.

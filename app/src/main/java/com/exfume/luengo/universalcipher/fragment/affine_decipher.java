@@ -1,26 +1,21 @@
-package com.exfume.luengo.universalcipher.fragments;
+package com.exfume.luengo.universalcipher.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 import com.exfume.luengo.universalcipher.R;
-import com.exfume.luengo.universalcipher.ciphers.Affine;
-
-
+import com.exfume.luengo.universalcipher.cipher.Affine;
 
 /**
- * Created by Javier on 24/02/2016.
+ * Created by Javier on 25/02/2016.
  */
-public class affine_cipher extends Fragment {
-
+public class affine_decipher extends Fragment{
     private Button mButton;
     private TextInputLayout mMessage;
     private TextInputLayout mA;
@@ -28,7 +23,7 @@ public class affine_cipher extends Fragment {
     private TextView result;
     private Affine cipher;
 
-    public affine_cipher(){
+    public affine_decipher(){
 
     }
 
@@ -42,6 +37,8 @@ public class affine_cipher extends Fragment {
         mA = (TextInputLayout) view.findViewById(R.id.mA);
         mB = (TextInputLayout) view.findViewById(R.id.mB);
         result = (TextView) view.findViewById(R.id.aResult);
+
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,16 +60,11 @@ public class affine_cipher extends Fragment {
             else{
                 cipher.setParams(text,a,b);
             }
-            result.setText(cipher.Cipher());
+            result.setText(cipher.Decipher());
         }
         catch (Exception e) {
             result.setText(e.getMessage());
-            Log.e("UCipher" , "error",e );
         }
-
-
     }
-
-
 
 }

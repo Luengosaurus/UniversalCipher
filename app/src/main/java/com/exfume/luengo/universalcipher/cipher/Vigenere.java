@@ -1,4 +1,4 @@
-package com.exfume.luengo.universalcipher.ciphers;
+package com.exfume.luengo.universalcipher.cipher;
 
 
 public class Vigenere extends Cipher {

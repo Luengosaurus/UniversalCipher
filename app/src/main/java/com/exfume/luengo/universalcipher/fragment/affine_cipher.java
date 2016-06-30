@@ -1,4 +1,4 @@
-package com.exfume.luengo.universalcipher.fragments;
+package com.exfume.luengo.universalcipher.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -12,20 +12,23 @@ import android.widget.TextView;
 
 
 import com.exfume.luengo.universalcipher.R;
-import com.exfume.luengo.universalcipher.ciphers.Vigenere;
+import com.exfume.luengo.universalcipher.cipher.Affine;
+
+
 
 /**
- * Created by Benjamin on 23/02/2016.
+ * Created by Javier on 24/02/2016.
  */
-public class vigenere_decipher extends Fragment {
+public class affine_cipher extends Fragment {
 
     private Button mButton;
     private TextInputLayout mMessage;
-    private TextInputLayout mKey;
+    private TextInputLayout mA;
+    private TextInputLayout mB;
     private TextView result;
-    private Vigenere cipher;
+    private Affine cipher;
 
-    public vigenere_decipher(){
+    public affine_cipher(){
 
     }
 
@@ -33,35 +36,43 @@ public class vigenere_decipher extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.vigenere_cipher, container, false);
-        mButton = (Button) view.findViewById(R.id.submit);
+        View view = inflater.inflate(R.layout.affine_cipher, container, false);
+        mButton = (Button) view.findViewById(R.id.aSubmit);
         mMessage = (TextInputLayout) view.findViewById(R.id.mMessage);
-        mKey = (TextInputLayout) view.findViewById(R.id.mKey);
-        result = (TextView) view.findViewById(R.id.mResult);
-
+        mA = (TextInputLayout) view.findViewById(R.id.mA);
+        mB = (TextInputLayout) view.findViewById(R.id.mB);
+        result = (TextView) view.findViewById(R.id.aResult);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Vigenere();
+                Affine();
             }
         });
         return view;
     }
 
-    private void Vigenere(){
-        try {
+
+    private void Affine(){
+        try{
             String text = mMessage.getEditText().getText().toString();
-            String key = mKey.getEditText().getText().toString();
-            if (cipher == null){
-                cipher = new Vigenere(text,key);
-            }else{
-                cipher.setParams(text,key);
+            int a = Integer.parseInt(mA.getEditText().getText().toString());
+            int b = Integer.parseInt(mB.getEditText().getText().toString());
+            if (cipher == null) {
+                cipher = new Affine(text, a, b);
             }
-            result.setText(cipher.Decipher());
+            else{
+                cipher.setParams(text,a,b);
+            }
+            result.setText(cipher.Cipher());
         }
-        catch (Exception e){
+        catch (Exception e) {
             result.setText(e.getMessage());
             Log.e("UCipher" , "error",e );
         }
+
+
     }
+
+
+
 }

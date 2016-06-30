@@ -1,5 +1,6 @@
 package com.exfume.luengo.universalcipher;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -14,20 +15,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.exfume.luengo.universalcipher.fragments.affine_cipher;
-import com.exfume.luengo.universalcipher.fragments.affine_decipher;
-import com.exfume.luengo.universalcipher.fragments.vigenere_cipher;
-import com.exfume.luengo.universalcipher.fragments.vigenere_decipher;
+import com.exfume.luengo.universalcipher.adapter.CipherAdapter;
+import com.exfume.luengo.universalcipher.fragment.affine_cipher;
+import com.exfume.luengo.universalcipher.fragment.affine_decipher;
+import com.exfume.luengo.universalcipher.fragment.vigenere_cipher;
+import com.exfume.luengo.universalcipher.fragment.vigenere_decipher;
 
-/**
- * Created by Benjamin on 19/02/2016.
- */
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private TabLayout tabLayout;
     private ViewPager mViewPager;
-    private PagerAdapter mPagerAdapter;
+    private CipherAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setToolbar();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new CipherAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.main_pager);
         mViewPager.setAdapter(mPagerAdapter);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -83,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
                 mPagerAdapter.addCipher(new affine_cipher(), new affine_decipher());
                 break;
 
+            case R.id.nav_keys:
+                Intent intent = new Intent(this, KeyManagementActivity.class);
+                startActivity(intent);
+                break;
+
         }
         mPagerAdapter.notifyDataSetChanged();
         setTitle(itemDrawer.getTitle());
@@ -98,39 +103,5 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public class PagerAdapter extends FragmentStatePagerAdapter {
-
-        private Fragment Cipher;
-        private Fragment Decipher;
-
-        public PagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-        public void addCipher(Fragment Cipher, Fragment Decipher){
-            this.Cipher = Cipher;
-            this.Decipher = Decipher;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return position == 0 ? this.Cipher : this.Decipher;
-        }
-
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-          return position == 0 ? "CIPHER" : "DECIPHER";
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            return POSITION_NONE;
-        }
-    }
 
 }
